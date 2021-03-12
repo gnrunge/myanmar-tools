@@ -1,0 +1,24 @@
+name: Myanmar Tools CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'maint/maint*'
+  pull_request:
+    branches: '**'
+
+jobs:
+
+  # Training Data Project
+  training-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '8'
+      - name: Training Data
+        run: |
+          cd training;
+          mvn compile;
+          mvn test
