@@ -34,7 +34,8 @@ jobs:
   # Java Client
   compile-and-test-java-client:
     runs-on: ubuntu-latest
-    steps: - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
         with:
           java-version: '7'
       - name: Java client test
