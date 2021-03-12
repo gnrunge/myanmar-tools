@@ -16,3 +16,30 @@ jobs:
           cd training;
           mvn compile;
           mvn test
+
+  # Check consistency between genconvert and compiled converters
+  consistency-check-genconvert-vs-compiled-converter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '8'
+      - name: Consistency genconvert vs compiled
+        run: |
+          make transcompile
+          # There should not be any dirty files:
+          git update-index --refresh
+          git diff-index HEAD
+
+  # Java Client
+  compile-and-test-java-client:
+    runs-on: ubuntu-latest
+    steps: - uses: actions/checkout@v2
+        with:
+          java-version: '7'
+      - name: Java client test
+        run: |
+          cd clients/java
+          mvn compile
+          mvn test
+      
